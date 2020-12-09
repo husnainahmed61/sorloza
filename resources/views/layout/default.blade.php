@@ -40,8 +40,11 @@ License: You must have a valid license purchased only from themeforest(the above
 
         {{-- Includable CSS --}}
         @yield('styles')
+<<<<<<< HEAD
         @stack('styles')
 
+=======
+>>>>>>> 59a7ac583698c39cbe5f6ab079fc8665b979e88d
     </head>
 
     <body {{ Metronic::printAttrs('body') }} {{ Metronic::printClasses('body') }}>
@@ -66,7 +69,11 @@ License: You must have a valid license purchased only from themeforest(the above
 
         {{-- Includable JS --}}
         @yield('scripts')
+<<<<<<< HEAD
         @yield('content')
+=======
+
+>>>>>>> 59a7ac583698c39cbe5f6ab079fc8665b979e88d
     </body>
 </html>
 

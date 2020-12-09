@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -30,3 +31,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+=======
+require('./bootstrap');
+
+// custom select2
+$('#kt_datatable_search_status').select2();
+$('#kt_datatable_search_type').select2();
+>>>>>>> 59a7ac583698c39cbe5f6ab079fc8665b979e88d
