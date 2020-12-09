@@ -15,10 +15,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('logout','Auth\LoginController@logout');
 Route::get('/signin','Auth\LoginController@loginForm');
 
+<<<<<<< HEAD
 Route::get('/dashboard', 'PagesController@index')->middleware('admin');
 
 Route::get('registerform','Auth\RegisterController@registerForm');
 Route::post('/create-user','Auth\RegisterController@create');
+=======
+Route::get('/dashboard', 'PagesController@index');
+
+Route::get('registerform','Auth\RegisterController@registerForm');
+Route::post('/create-user','Auth\RegisterController@create');
+
+>>>>>>> 6779ae43f2fd263676be2c8f4fec1dd4d008af1f
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
