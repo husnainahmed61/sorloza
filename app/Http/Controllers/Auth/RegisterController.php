@@ -51,7 +51,7 @@ class RegisterController extends Controller
     {
         // echo "<pre>";
         // print_r($data);die;
-        $data['role_id'] = 1;
+        $data['role_id'] = 2;
         return Validator::make($data, [
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],

@@ -12,17 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('logout','Auth\LoginController@logout');
+Route::get('/signin','Auth\LoginController@loginForm');
 
-<<<<<<< HEAD
-Route::get('/dashboard', 'PagesController@index');
+Route::get('/dashboard', 'PagesController@index')->middleware('admin');
 
 Route::get('registerform','Auth\RegisterController@registerForm');
 Route::post('/create-user','Auth\RegisterController@create');
-=======
-Route::get('/', 'PagesController@index');
-
-
->>>>>>> 59a7ac583698c39cbe5f6ab079fc8665b979e88d
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
@@ -37,10 +33,7 @@ Route::get('/icons/svg', 'PagesController@svg');
 
 // Quick search dummy route to display html elements in search dropdown (header search)
 Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
-<<<<<<< HEAD
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-=======
->>>>>>> 59a7ac583698c39cbe5f6ab079fc8665b979e88d
