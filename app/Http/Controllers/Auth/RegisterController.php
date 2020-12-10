@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -47,7 +47,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Array $data)
     {
         // echo "<pre>";
         // print_r($data);die;
@@ -76,11 +76,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Array $data)
     {
         $data['role_id']=1;
-        // echo "<pre>";
-        // print_r($data);die;
 
         return User::create([
             'role_id'=>$data['role_id'],

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('logout','Auth\LoginController@logout');
-Route::get('/signin','Auth\LoginController@loginForm');
+Route::get('/','Auth\LoginController@loginForm');
 
 Route::get('/dashboard', 'PagesController@index')->middleware('admin');
 

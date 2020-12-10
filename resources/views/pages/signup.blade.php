@@ -147,7 +147,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<!--begin::Signin-->
 						<div class="login-form login-form-signup">
 							<!--begin::Form-->
-							<form class="form" novalidate="novalidate" id="kt_login_signup_form" action="{{ route('register') }}" method="POST">
+							<form class="form" novalidate="novalidate" id="kt_login_signup_form" action="{{ url('register') }}" method="POST">
 								{{ csrf_field() }}
 								<!--begin: Wizard Step 1-->
 								<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
