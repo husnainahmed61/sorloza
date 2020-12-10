@@ -8,10 +8,6 @@ class PagesController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
-        
-=======
->>>>>>> 6779ae43f2fd263676be2c8f4fec1dd4d008af1f
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
 
