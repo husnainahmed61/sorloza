@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e3adb0ace9eeed4c5610ed74967a616",
+    "content-hash": "634449a3703f9c49b4409076e00d9054",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -904,7 +904,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/b89363b540bd8ad6e727ee165b510a19fe170a28",
                 "reference": "b89363b540bd8ad6e727ee165b510a19fe170a28",
-
                 "shasum": ""
             },
             "require": {
@@ -1059,6 +1058,62 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2020-12-03T13:47:59+00:00"
+        },
+        {
+            "name": "laravel/helpers",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/helpers.git",
+                "reference": "cde8ea2427db4f37d67729846b70452499210a21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/helpers/zipball/cde8ea2427db4f37d67729846b70452499210a21",
+                "reference": "cde8ea2427db4f37d67729846b70452499210a21",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0",
+                "php": "^7.1.3|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Dries Vints",
+                    "email": "dries.vints@gmail.com"
+                }
+            ],
+            "description": "Provides backwards compatibility for helpers in the latest Laravel release.",
+            "keywords": [
+                "helpers",
+                "laravel"
+            ],
+            "support": {
+                "source": "https://github.com/laravel/helpers/tree/v1.4.0"
+            },
+            "time": "2020-11-03T16:38:41+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2411,22 +2466,6 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-<<<<<<< HEAD
-            "version": "v6.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
-                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
-                "shasum": ""
-            },
-            "require": {
-                "egulias/email-validator": "~2.0",
-=======
             "version": "v6.2.4",
             "source": {
                 "type": "git",
@@ -2441,27 +2480,18 @@
             },
             "require": {
                 "egulias/email-validator": "^2.0",
->>>>>>> 6779ae43f2fd263676be2c8f4fec1dd4d008af1f
                 "php": ">=7.0.0",
                 "symfony/polyfill-iconv": "^1.0",
                 "symfony/polyfill-intl-idn": "^1.10",
                 "symfony/polyfill-mbstring": "^1.0"
             },
             "require-dev": {
-<<<<<<< HEAD
                 "mockery/mockery": "~0.9.1",
                 "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
             },
             "suggest": {
                 "ext-intl": "Needed to support internationalized email addresses",
                 "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
-=======
-                "mockery/mockery": "^1.0",
-                "symfony/phpunit-bridge": "^4.4|^5.0"
-            },
-            "suggest": {
-                "ext-intl": "Needed to support internationalized email addresses"
->>>>>>> 6779ae43f2fd263676be2c8f4fec1dd4d008af1f
             },
             "type": "library",
             "extra": {
@@ -2496,11 +2526,6 @@
             ],
             "support": {
                 "issues": "https://github.com/swiftmailer/swiftmailer/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.3"
-            },
-            "time": "2019-11-12T09:31:26+00:00"
-=======
                 "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.4"
             },
             "funding": [
@@ -2514,7 +2539,6 @@
                 }
             ],
             "time": "2020-12-08T18:02:06+00:00"
->>>>>>> 6779ae43f2fd263676be2c8f4fec1dd4d008af1f
         },
         {
             "name": "symfony/console",
