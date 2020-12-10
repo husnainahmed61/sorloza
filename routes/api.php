@@ -16,13 +16,14 @@ use App\Http\Controllers\UsersApiController;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+	
     return $request->user();
+    
 });
 
 Route::post('register', 'UsersApiController@store'); // Signup
-
-
-Route::post('/order','OrderController@placeOrder');
+  
+    Route::post('/order','OrderController@placeOrder');
 
 
 

@@ -16,9 +16,11 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
+        if(Auth::check()){
         if(Auth::user()->role_id==1){
          return $next($request); 
         }
-        return redirect('signin')->with('error','Please Login');
+    }
+        return redirect('/')->with('error','Please Login');
     }
 }
