@@ -77,11 +77,11 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    { 
+    {
         $data['role_id']=1;
         // echo "<pre>";
         // print_r($data);die;
-        
+
         return User::create([
             'role_id'=>$data['role_id'],
             'first_name' => $data['first_name'],
@@ -98,7 +98,7 @@ class RegisterController extends Controller
             'preferred_delivery_window' => $data['preferred_delivery_window'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-          
+
         ]);
     }
 
