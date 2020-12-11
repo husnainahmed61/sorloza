@@ -17,8 +17,8 @@ class Login
     public function handle(Request $request, Closure $next)
     {
         if(Auth::check()){
-         return $next($request); 
+         return $next($request);
         }
-        return redirect('/)->with('error','Please Login');
+        return redirect('signin')->with('error','Please Login');
     }
 }
