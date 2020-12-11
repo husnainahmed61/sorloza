@@ -31,12 +31,16 @@ class UsersApiController extends Controller
         $result = $user->save();
 
         if ($result){
-            return ["Respone" => Response::HTTP_CREATED,
+            return [
+                "Response" => Response::HTTP_CREATED,
                 "Result" => "Data has been saved",
-                "Data" => $result];
+                "Data" => $user->toArray()
+            ];
         } else{
-            return ["Respone" => Response::HTTP_FORBIDDEN,
-                "Result" => "Failed to Save"];
+            return [
+                "Response" => Response::HTTP_FORBIDDEN,
+                "Result" => "Failed to Save"
+            ];
         }
 
     }
