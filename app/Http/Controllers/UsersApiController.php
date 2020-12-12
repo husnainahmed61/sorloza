@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterUserRequest;
+use App\Mail\NewMail;
 use App\Models\User;
 use App\Models\userContacts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,6 +37,13 @@ class UsersApiController extends Controller
         $result = $user->save();
 
         if ($result){
+
+            $userData = [
+                'name' => $request->first_name.' '.$request->last_name,
+                'info' => 'Laravel Developer'
+            ];
+            Mail::to($request->email)->send(new NewMail($userData));
+
             return [
                 "Response" => Response::HTTP_CREATED,
                 "Result" => "Data has been saved",
