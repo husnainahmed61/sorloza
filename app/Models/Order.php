@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $table = 'orders';
-     protected $fillable = ['user_id','payment_id','address_id','price','img','created_at','updated_at'];
+     protected $fillable = ['user_id','payment_id','address_id','recipient_id','price','img','created_at','updated_at'];
     public function payment(){
     	return $this->hasOne(Payment::class);
     }
@@ -20,5 +20,9 @@ class Order extends Model
 
     public function address(){
      return $this->hasOne(Address::class);
+    }
+
+    public function recipient(){
+        return $this->hasOne(Recipient::class);
     }
 }
