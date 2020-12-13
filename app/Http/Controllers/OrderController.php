@@ -7,11 +7,11 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    //
 
   public function placeOrder(Request $request){
 
@@ -70,6 +70,34 @@ class OrderController extends Controller
       }
       return response()->json(['error'=> "Failed to process order"], 401);
 
+  }
+
+  public function userOrders(Request $request){
+      $validator = Validator::make($request->all(),
+          [
+              'userId' => 'required',
+          ]);
+
+      if ($validator->fails()) {
+          return response()->json(['error'=>$validator->errors()], 401);
+      }
+
+      $userId = $request->userId;
+
+      $userOrders = DB::table('orders')
+          ->join('payments', 'orders.payment_id', '=', 'payments.id')
+          ->join('address', 'orders.address_id', '=', 'address.id')
+          ->join('recipients', 'orders.recipient_id', '=', 'recipients.id')
+          ->where('orders.user_id', $userId)->get();
+
+      if ($userOrders) {
+          return response()->json(
+              [
+                  'success'=> "User Orders",
+                  'data' => $userOrders,
+              ], 200);
+      }
+      return response()->json(['error'=> "Failed to fetch user orders"], 401);
   }
 
 }
