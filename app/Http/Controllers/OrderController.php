@@ -100,4 +100,32 @@ class OrderController extends Controller
       return response()->json(['error'=> "Failed to fetch user orders"], 401);
   }
 
+  public function showPaidOrders(){
+      $page_title = 'Paid Orders List';
+      $page_description = 'All Paid Orders';
+      $paidOrders = DB::table('orders')
+          ->select('users.first_name','users.last_name','orders.*','payments.*','address.*','recipients.*')
+          ->join('payments', 'orders.payment_id', '=', 'payments.id')
+          ->join('address', 'orders.address_id', '=', 'address.id')
+          ->join('recipients', 'orders.recipient_id', '=', 'recipients.id')
+          ->join('users', 'orders.user_id', '=', 'users.id')
+          ->where('payments.status', 1)
+          ->orderBy('orders.id', 'desc')->get();
+
+      return view('pages.paidOrdersList', compact('page_title', 'page_description','paidOrders'));
+  }
+    public function showPendingPaymentOrders(){
+        $page_title = 'Un-Paid Orders List';
+        $page_description = 'Un Paid Orders';
+        $unpaidOrders = DB::table('orders')
+            ->select('users.first_name','users.last_name','orders.*','payments.*','address.*','recipients.*')
+            ->join('payments', 'orders.payment_id', '=', 'payments.id')
+            ->join('address', 'orders.address_id', '=', 'address.id')
+            ->join('recipients', 'orders.recipient_id', '=', 'recipients.id')
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->where('payments.status', 0)
+            ->orderBy('orders.id', 'desc')->get();
+
+        return view('pages.UnpaidOrdersList', compact('page_title', 'page_description','unpaidOrders'));
+    }
 }

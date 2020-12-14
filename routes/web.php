@@ -16,6 +16,10 @@ Route::get('logout','Auth\LoginController@logout');
 Route::get('/signin','Auth\LoginController@loginForm');
 
 Route::get('/dashboard', 'PagesController@index')->middleware('admin');
+Route::get('/users','UsersController@show');
+Route::get('/paid-orders','OrderController@showPaidOrders');
+Route::get('/pending-payment','OrderController@showPendingPaymentOrders');
+
 
 //Route::get('registerform','Auth\RegisterController@registerForm');
 //Route::post('/create-user','Auth\RegisterController@create');
