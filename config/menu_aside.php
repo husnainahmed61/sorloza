@@ -42,6 +42,11 @@ return [
                     ]
                 ],
                 [
+                    'title' => 'Notifications',
+                    'bullet' => 'dot',
+                    'page' => 'notifications',
+                ],
+                [
                     'title' => 'Profile',
                     'bullet' => 'dot',
                     'submenu' => [

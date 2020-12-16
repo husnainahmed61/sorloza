@@ -19,6 +19,7 @@ Route::get('/dashboard', 'PagesController@index')->middleware('admin');
 Route::get('/users','UsersController@show');
 Route::get('/paid-orders','OrderController@showPaidOrders');
 Route::get('/pending-payment','OrderController@showPendingPaymentOrders');
+Route::get('/notifications','HomeController@addNotification');
 
 
 //Route::get('registerform','Auth\RegisterController@registerForm');
