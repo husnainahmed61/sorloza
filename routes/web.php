@@ -13,12 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('logout','Auth\LoginController@logout');
-Route::get('/','Auth\LoginController@loginForm');
+Route::get('/signin','Auth\LoginController@loginForm');
 
 Route::get('/dashboard', 'PagesController@index')->middleware('admin');
+Route::get('/users','UsersController@show');
+Route::get('/paid-orders','OrderController@showPaidOrders');
+Route::get('/pending-payment','OrderController@showPendingPaymentOrders');
+Route::get('/notifications','HomeController@addNotification');
 
-Route::get('registerform','Auth\RegisterController@registerForm');
-Route::post('/create-user','Auth\RegisterController@create');
+
+//Route::get('registerform','Auth\RegisterController@registerForm');
+//Route::post('/create-user','Auth\RegisterController@create');
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
