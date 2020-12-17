@@ -112,4 +112,31 @@ class UsersApiController extends Controller
         return response()->json(['error'=> "Failed to fetch recipients"], 401);
 
     }
+
+    public function getUserNotifications(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+                'user_id' => 'required',
+            ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+
+        $user_id = $request->user_id;
+
+        $userNotifications = DB::table('user_notifications')
+            ->join('notification','user_notifications.notification_id','=','notification.id')
+            ->where('user_id', $user_id)->get();
+
+        if ($userNotifications) {
+            return response()->json(
+                [
+                    'success'=> "Notifications Fetched Successfully",
+                    'data' => $userNotifications,
+                ], 200);
+        }
+        return response()->json(['error'=> "Failed to fetch notifications"], 401);
+
+    }
 }

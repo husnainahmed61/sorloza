@@ -40,7 +40,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         {{-- Includable CSS --}}
         @yield('styles')
-        
+
 
     </head>
 
@@ -66,7 +66,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
         {{-- Includable JS --}}
         @yield('scripts')
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.min.js" integrity="sha512-ljeReA8Eplz6P7m1hwWa+XdPmhawNmo9I0/qyZANCCFvZ845anQE+35TuZl9+velym0TKanM2DXVLxSJLLpQWw==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" integrity="sha512-DJ1SGx61zfspL2OycyUiXuLtxNqA3GxsXNinUX3AnvnwxbZ+YQxBARtX8G/zHvWRG9aFZz+C7HxcWMB0+heo3w==" crossorigin="anonymous" />
+
     </body>
 </html>
 
