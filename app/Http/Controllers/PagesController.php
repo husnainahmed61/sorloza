@@ -13,7 +13,8 @@ class PagesController extends Controller
 
         return view('pages.dashboard', compact('page_title', 'page_description'));
     }
-
+//test commit
+//test
     /**
      * Demo methods below
      */
