@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+//use Barryvdh\DomPDF\PDF as PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class UsersApiController extends Controller
 {
@@ -138,5 +140,19 @@ class UsersApiController extends Controller
         }
         return response()->json(['error'=> "Failed to fetch notifications"], 401);
 
+    }
+
+    public function createPDF() {
+        $data["email"] = "aatmaninfotech@gmail.com";
+        $data["title"] = "From ItSolutionStuff.com";
+        $data["body"] = "This is Demo";
+
+        $pdf = PDF::loadView('email.myTestMail', $data);
+
+        Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"], $data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "text.pdf");
+        });
     }
 }

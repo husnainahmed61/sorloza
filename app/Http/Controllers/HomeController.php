@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notifications;
+use App\Models\Order;
+use App\Models\User;
 use App\Models\UserNotifications;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -47,7 +49,7 @@ class HomeController extends Controller
             ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return redirect()->back()->with('error', $validator->errors());
         }
 
         $notification = new Notifications();
@@ -66,5 +68,87 @@ class HomeController extends Controller
             return redirect()->back()->with('success', 'Notification Sent Successfully');
         }
     }
+
+    public function ordersChart(Request $request){
+        $page_title = 'Orders';
+        $page_description = 'Orders Received Last Week';
+
+        if (isset($request->dateFrom) && isset($request->dateTo)){
+            $validator = Validator::make($request->all(),
+                [
+                    'dateFrom' => 'required',
+                    'dateTo' => 'required',
+                ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->with('error', $validator->errors());
+            }
+
+            $orders = Order::orderBy('created_at', 'desc')
+                ->whereBetween('created_at', [$request->dateFrom, $request->dateTo])
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+                ->get(array(
+                    DB::raw('Date(created_at) as date'),
+                    DB::raw('COUNT(*) as "orders"')
+                ));
+
+            return view('charts.orders', compact('page_title', 'page_description','orders'));
+        }
+
+
+        $lastWeek = date('Y-m-d H:i.s', strtotime('-1 week'));
+        $orders = Order::orderBy('created_at', 'desc')->where('created_at', '>=', $lastWeek)
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+            ->get(array(
+                DB::raw('Date(created_at) as date'),
+                DB::raw('COUNT(*) as "orders"')
+            ));
+
+        return view('charts.orders', compact('page_title', 'page_description','orders'));
+    }
+
+    public function usersChart(Request $request){
+        $page_title = 'Users';
+        $page_description = 'Users Registered Last Week';
+
+        if (isset($request->dateFrom) && isset($request->dateTo)){
+            $validator = Validator::make($request->all(),
+                [
+                    'dateFrom' => 'required',
+                    'dateTo' => 'required',
+                ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->with('error', $validator->errors());
+            }
+
+            $users = User::orderBy('created_at', 'desc')
+                ->whereBetween('created_at', [$request->dateFrom, $request->dateTo])
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+                ->get(array(
+                    DB::raw('Date(created_at) as date'),
+                    DB::raw('COUNT(*) as "users"')
+                ));
+
+            return view('charts.users_chart', compact('page_title', 'page_description','users'));
+        }
+
+        $lastWeek = date('Y-m-d H:i.s', strtotime('-1 week'));
+        $users = User::orderBy('created_at', 'desc')->where('created_at', '>=', $lastWeek)
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+            ->get(array(
+                DB::raw('Date(created_at) as date'),
+                DB::raw('COUNT(*) as "users"')
+            ));
+
+        return view('charts.users_chart', compact('page_title', 'page_description','users'));
+    }
+
+    public function viewCard(){
+        //echo 'ok';
+        return view('cards/cardTest');
+    }
+
+
 
 }
