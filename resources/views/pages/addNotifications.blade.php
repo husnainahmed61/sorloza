@@ -4,16 +4,24 @@
 {{-- Content --}}
 @section('content')
 
+    @if (\Session::has('success'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{!! \Session::get('success') !!}</li>
+            </ul>
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
                 <h3 class="card-label">Add Notifications
-                    <div class="text-muted pt-2 font-size-sm">All Paid Orders List</div>
                 </h3>
             </div>
         </div>
 
         <div class="card-body">
+            <form class="form"  action="{{ route('submitNotification') }}" method="POST">
+            {{ csrf_field() }}
             <!--begin::Search Form-->
             <div class="mt-2 mb-5 mt-lg-5 mb-lg-12">
                 <div class="row align-items-center">
@@ -21,7 +29,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-10 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Write notification here...." id="kt_datatable_search_query"/>
+                                    <input type="text" name="notification" class="form-control" placeholder="Write notification here...." id="kt_datatable_search_query"/>
                                     <span><i class="flaticon2-pen text-danger"></i></span>
                                 </div>
                             </div>
@@ -33,27 +41,50 @@
                 <div class="row align-items-center">
                     <div class="col-lg-10 col-xl-8">
                         <div class="row align-items-center">
-                            <div class="col-md-6 my-2 my-md-0">
+                            <div class="col-md-8 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Select Users:</label>
-                                    <select class="form-control mt-multiselect" id="kt_datatable_search_type" >
-                                        <option value="">All</option>
-                                        <option value="1">Online</option>
-                                        <option value="2">Retail</option>
-                                        <option value="3">Direct</option>
+                                    <select class="form-control mt-multiselect" name="users[]" id="example-selectAllJustVisible"  multiple="multiple">
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-xl-4 mt-5 mt-lg-0">
-                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                            Search
-                        </a>
+                        <button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Send</button>
                     </div>
                 </div>
             </div>
             <!--end::Search Form-->
+            </form>
+        </div>
+
+        <hr>
+        <div class="card-body">
+            <table class="table table-bordered table-hover" id="">
+                <thead>
+                <tr>
+                    <th>Record ID</th>
+                    <th>Notification Body</th>
+                    <th>Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php $i=1 ?>
+                @foreach ($notifications as $notification)
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $notification->body }}</td>
+                        <td>{{ $notification->created_at }}</td>
+                        <td nowrap></td>
+                    </tr>
+                    <?php $i++ ?>
+                @endforeach
+                </tbody>
+            </table>
 
         </div>
 
@@ -75,4 +106,14 @@
     {{-- page scripts --}}
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example-selectAllJustVisible').multiselect({
+                enableFiltering: true,
+                includeSelectAllOption: true,
+                selectAllJustVisible: false
+            });
+        });
+    </script>
+
 @endsection

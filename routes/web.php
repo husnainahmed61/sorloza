@@ -20,7 +20,7 @@ Route::get('/users','UsersController@show');
 Route::get('/paid-orders','OrderController@showPaidOrders');
 Route::get('/pending-payment','OrderController@showPendingPaymentOrders');
 Route::get('/notifications','HomeController@addNotification');
-
+Route::post('submitNotification','HomeController@storeNotification')->name('submitNotification');
 
 //Route::get('registerform','Auth\RegisterController@registerForm');
 //Route::post('/create-user','Auth\RegisterController@create');

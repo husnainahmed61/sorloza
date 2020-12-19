@@ -24,6 +24,7 @@ Route::post('/order','OrderController@placeOrder');  // order placing
 Route::post('/userContact','UsersApiController@userContactStore');  // user contacts saving
 Route::post('/allUserContact','UsersApiController@allUserContacts');  // user contacts fetch
 Route::post('/userOrders','OrderController@userOrders');  // user orders fetch
+Route::post('/userNotifications','UsersApiController@getUserNotifications');  // user orders fetch
 
 
 
