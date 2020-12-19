@@ -47,6 +47,20 @@ return [
                     'page' => 'notifications',
                 ],
                 [
+                    'title' => 'Reports',
+                    'bullet' => 'dot',
+                    'submenu' => [
+                        [
+                            'title' => 'Orders',
+                            'page' => 'orders-chart'
+                        ],
+                        [
+                            'title' => 'Users',
+                            'page' => 'users-chart'
+                        ],
+                    ]
+                ],
+                [
                     'title' => 'Profile',
                     'bullet' => 'dot',
                     'submenu' => [

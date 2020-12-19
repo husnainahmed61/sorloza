@@ -2,14 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
     public function index()
     {
+
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
+//        $lastWeek = date('Y-m-d H:i.s', strtotime('-1 week'));
+//        $users = User::orderBy('created_at', 'desc')->where('created_at', '>=', $lastWeek)
+//            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+//            ->get(array(
+//                DB::raw('Date(created_at) as date'),
+//                DB::raw('COUNT(*) as "users"')
+//            ));
+//        $orders = Order::orderBy('created_at', 'desc')->where('created_at', '>=', $lastWeek)
+//            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+//            ->get(array(
+//                DB::raw('Date(created_at) as date'),
+//                DB::raw('COUNT(*) as "orders"')
+//            ));
+//        $date = Carbon::today()->subDays(7);
+//        $users = User::where('created_at', '>=', $date)->get();
+
+//        echo date('Y-m-d H:i.s', strtotime('-1 week'));
+//            echo "<pre>";
+//           print_r($orders);
+//           die;
 
         return view('pages.dashboard', compact('page_title', 'page_description'));
     }
