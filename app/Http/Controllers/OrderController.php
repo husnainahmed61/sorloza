@@ -7,14 +7,15 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use \PDF;
 class OrderController extends Controller
 {
 
   public function placeOrder(Request $request){
-
+      //ini_set('max_execution_time', 300);
       $validator = Validator::make($request->all(),
           [
               'userId' => 'required',
@@ -50,12 +51,12 @@ class OrderController extends Controller
       $extension = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
       $fullFileName = $fileName."-".time().".".$image->getClientOriginalExtension();
 
-      //$name = $image->getClientOriginalName();
+      $name = $image->getClientOriginalName();
       $destinationPath = public_path('/images');
       $image->move($destinationPath, $fullFileName);
 
-      //$file = $request->file('photo')->store('public/images');
-
+      $file = $request->file('photo')->store('public/images');
+       
       $order = new Order();
       $order->user_id = $request->userId;
       $order->payment_id = $paymentResult['id'];
@@ -64,8 +65,9 @@ class OrderController extends Controller
       $order->price = $request->price;
       $order->img = $fullFileName;
       $orderResult = $order->save();
-
+      
       if ($orderResult) {
+          //$this->createPDF($fullFileName,$recipient->message,$address->shipping_address);
           return response()->json(['success'=> " Order Created"], 200);
       }
       return response()->json(['error'=> "Failed to process order"], 401);
@@ -127,5 +129,22 @@ class OrderController extends Controller
             ->orderBy('orders.id', 'desc')->get();
 
         return view('pages.UnpaidOrdersList', compact('page_title', 'page_description','unpaidOrders'));
+    }
+
+    public function createPDF($img,$msg,$address) {
+        
+        $data["email"] = "fayazabbasi498@gmail.com";
+        $data["title"] = "From ItSolutionStuff.com";
+        $data["body"] = "This is Demo";
+        $data['msg']  = $msg;
+        $data['img'] = $img;
+        $data['address'] = $address;
+        $pdf = PDF::loadView('email.myTestMail',$data); 
+        Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
+            $message->from('fayazabbasi498@gmail.com','The Sender');
+            $message->to($data["email"], $data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "demo.pdf");
+        });
     }
 }
