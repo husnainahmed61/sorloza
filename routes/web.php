@@ -16,7 +16,7 @@ Route::get('logout','Auth\LoginController@logout');
 Route::get('/signin','Auth\LoginController@loginForm');
 
 Route::get('/dashboard', 'PagesController@index')->middleware('admin');
-Route::get('/users','UsersController@show');
+Route::get('/users','UsersController@show')->middleware('admin');
 Route::get('/paid-orders','OrderController@showPaidOrders');
 Route::get('/pending-payment','OrderController@showPendingPaymentOrders');
 Route::get('/notifications','HomeController@addNotification');
