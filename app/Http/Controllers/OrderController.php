@@ -140,7 +140,7 @@ class OrderController extends Controller
         $pdf = PDF::loadView('email.myTestMail',$data);
         Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
             $message->from('info@sorloza.com','The Sender');
-            $message->to('husnainahmed61@gmail.com', 'husnainahmed61@gmail.com')
+            $message->to('s.perez86@gmail.com', 's.perez86@gmail.com')
                 ->subject($data["title"])
                 ->attachData($pdf->output(), "order-".time().".pdf");
         });
