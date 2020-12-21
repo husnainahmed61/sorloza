@@ -23,7 +23,7 @@ Route::get('/notifications','HomeController@addNotification');
 Route::post('submitNotification','HomeController@storeNotification')->name('submitNotification');
 Route::get('/orders-chart','HomeController@ordersChart')->name('orders-chart');
 Route::get('/users-chart','HomeController@usersChart')->name('users-chart');
-Route::get('/card','UsersApiController@createPDF');
+Route::get('/card','OrderController@testCreatePDF');
 
 //Route::get('registerform','Auth\RegisterController@registerForm');
 //Route::post('/create-user','Auth\RegisterController@create');

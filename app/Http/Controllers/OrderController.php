@@ -136,12 +136,33 @@ class OrderController extends Controller
         $data['msg']  = $msg;
         $data['address'] = $address;
 
+
         $pdf = PDF::loadView('email.myTestMail',$data);
         Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
             $message->from('info@sorloza.com','The Sender');
             $message->to($data["email"], $data["email"])
                 ->subject($data["title"])
-                ->attachData($pdf->output(), "demo.pdf");
+                ->attachData($pdf->output(), "order-".time().".pdf");
         });
     }
+
+    public function testCreatePDF() {
+
+        $data["title"] = "Order and has been received successfully";
+
+        $img = "low-1607960850.JPG";
+        $msg  = "this is test message and messsage to check pdf";
+        $address = "this will be the recipient address and address of the user";
+
+        return view('email.myTestMail', compact('img','msg','address'));
+//        $pdf = PDF::loadView('email.myTestMail',$data);
+//        Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
+//            $message->from('info@sorloza.com','The Sender');
+//            $message->to($data["email"], $data["email"])
+//                ->subject($data["title"])
+//                ->attachData($pdf->output(), "demo.pdf");
+//        });
+    }
+
+
 }
