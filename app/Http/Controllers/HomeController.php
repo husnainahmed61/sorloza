@@ -10,6 +10,7 @@ use App\Models\UserNotifications;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use function GuzzleHttp\Promise\all;
 use function PHPUnit\Framework\assertDirectoryDoesNotExist;
@@ -47,6 +48,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(),
             [
                 'notification' => 'required',
+                'type' => 'required',
             ]);
 
         if ($validator->fails()) {
@@ -55,17 +57,32 @@ class HomeController extends Controller
 
         $notification = new Notifications();
         $notification->body = $request->notification;
+        $notification->type = $request->type;
         $result = $notification->save();
         $insertId = $notification->toArray();
         if ($result){
             $notificationId = $insertId['id'];
             $users = $request->users;
             foreach ($users as $user){
+                if ($request->type == 'email'){
+                    $userDetail = User::where('id',$user)->first();
+
+                    $to_name = $userDetail->first_name.' '.$userDetail->last_name;
+                    $to_email = $userDetail->email;
+                    $data = array('name' => 'Sorloza', 'body' => $request->notification);
+
+                    Mail::send('email.notification', $data, function($message) use ($to_name, $to_email) {
+                        $message->to($to_email, $to_name)
+                            ->subject('Notification From Admin');
+                    $message->from('test@sorloza.com','Sorloza');
+                    });
+                }
                 $userNotifications = new UserNotifications();
                 $userNotifications->notification_id = $notificationId;
                 $userNotifications->user_id = $user;
                 $userNotificationsResult = $userNotifications->save();
             }
+
             return redirect()->back()->with('success', 'Notification Sent Successfully');
         }
     }

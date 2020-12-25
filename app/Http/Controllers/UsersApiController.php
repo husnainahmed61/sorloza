@@ -129,7 +129,8 @@ class UsersApiController extends Controller
 
         $userNotifications = DB::table('user_notifications')
             ->join('notification','user_notifications.notification_id','=','notification.id')
-            ->where('user_id', $user_id)->get();
+            ->where('user_id', $user_id)
+            ->where('type', '=','notification')->get();
 
         if ($userNotifications) {
             return response()->json(

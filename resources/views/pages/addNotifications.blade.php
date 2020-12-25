@@ -37,25 +37,27 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-2 mb-5 mt-lg-5 mb-lg-12">
-                <div class="row align-items-center">
-                    <div class="col-lg-10 col-xl-8">
-                        <div class="row align-items-center">
-                            <div class="col-md-8 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Select Users:</label>
-                                    <select class="form-control mt-multiselect" name="users[]" id="example-selectAllJustVisible"  multiple="multiple">
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <label class="">Select Users:</label>
+                    <select class="form-control mt-multiselect" name="users[]" id="example-selectAllJustVisible"  multiple="multiple">
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" value="notification" checked>
+                        <label class="form-check-label" for="inlineRadio1">Notification</label>
                     </div>
-                    <div class="col-lg-2 col-xl-4 mt-5 mt-lg-0">
-                        <button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Send</button>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="type" value="email">
+                        <label class="form-check-label" for="inlineRadio2">E-mail</label>
                     </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-light-primary px-6 font-weight-bold">Send</button>
                 </div>
             </div>
             <!--end::Search Form-->
