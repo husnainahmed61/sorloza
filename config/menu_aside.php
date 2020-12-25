@@ -61,6 +61,11 @@ return [
                     ]
                 ],
                 [
+                    'title' => 'Post Card Price',
+                    'bullet' => 'dot',
+                    'page' => 'postCardPrice',
+                ],
+                [
                     'title' => 'Profile',
                     'bullet' => 'dot',
                     'submenu' => [

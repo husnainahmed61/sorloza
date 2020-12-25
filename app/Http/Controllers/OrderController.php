@@ -136,11 +136,12 @@ class OrderController extends Controller
         $data['msg']  = $msg;
         $data['address'] = $address;
 
+        $customPaper = array(0,0,450.00,550.80);
 
-        $pdf = PDF::loadView('email.myTestMail',$data);
-        Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
-            $message->from('info@sorloza.com','The Sender');
-            $message->to('s.perez86@gmail.com', 's.perez86@gmail.com')
+        $pdf = PDF::loadView('email.myTestMail',$data)->setPaper($customPaper, 'landscape');
+        Mail::send('email.orderBody', $data, function($message)use($data, $pdf) {
+            $message->from('test@sorloza.com','Sorloza.com');
+            $message->to('s.perez86@gmail.com', 's.perez86')
                 ->subject($data["title"])
                 ->attachData($pdf->output(), "order-".time().".pdf");
         });
@@ -151,8 +152,15 @@ class OrderController extends Controller
         $data["title"] = "Order and has been received successfully";
 
         $img = "low-1607960850.JPG";
-        $msg  = "this is test message and messsage to check pdf";
-        $address = "this will be the recipient address and address of the user";
+        $msg  = "Un edificio tiene dos vidas. La que imagina su creador y la vida que tiene.
+Y no siempre son iguales.
+Los arquitectos no inventan nada, solo transforman la
+realidad.
+No me importa cómo se ve un edificio, sino si significa algo a las personas que lo utilizan.";
+        $address = "Joan Cusachs Recoder
+Calle Valencia 285
+08009 Barcelona
+España";
 
         return view('email.myTestMail', compact('img','msg','address'));
 //        $pdf = PDF::loadView('email.myTestMail',$data);
