@@ -24,6 +24,8 @@ Route::post('submitNotification','HomeController@storeNotification')->name('subm
 Route::get('/orders-chart','HomeController@ordersChart')->name('orders-chart');
 Route::get('/users-chart','HomeController@usersChart')->name('users-chart');
 Route::get('/card','OrderController@testCreatePDF');
+Route::get('/postCardPrice','HomeController@postCardPriceForm')->name('postCardPrice');
+Route::post('submitPostCardPrice','HomeController@submitPostCardPrice')->name('submitPostCardPrice');
 
 //Route::get('registerform','Auth\RegisterController@registerForm');
 //Route::post('/create-user','Auth\RegisterController@create');

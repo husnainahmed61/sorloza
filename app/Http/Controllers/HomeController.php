@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notifications;
 use App\Models\Order;
+use App\Models\PostCardPrice;
 use App\Models\User;
 use App\Models\UserNotifications;
 use Illuminate\Contracts\Support\Renderable;
@@ -147,6 +148,30 @@ class HomeController extends Controller
     public function viewCard(){
         //echo 'ok';
         return view('cards/cardTest');
+    }
+
+    public function postCardPriceForm(){
+        return view('pages/addPostCardPrice');
+    }
+
+    public function submitPostCardPrice(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+                'postCardPrice' => 'required',
+            ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors());
+        }
+
+        $postCardPrice = new PostCardPrice();
+        $postCardPrice->price = $request->postCardPrice;
+        $result = $postCardPrice->save();
+        if ($result){
+            return redirect()->back()->with('success', 'Price Saved Successfully');
+        }
+        return redirect()->back()->with('error', 'Failed To Save Price');
+
     }
 
 

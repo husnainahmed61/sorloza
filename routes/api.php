@@ -25,6 +25,7 @@ Route::post('/userContact','UsersApiController@userContactStore');  // user cont
 Route::post('/allUserContact','UsersApiController@allUserContacts');  // user contacts fetch
 Route::post('/userOrders','OrderController@userOrders');  // user orders fetch
 Route::post('/userNotifications','UsersApiController@getUserNotifications');  // user orders fetch
+Route::get('/postCardPrice','UsersApiController@getPostCardPrice');  // user orders fetch
 
 
 

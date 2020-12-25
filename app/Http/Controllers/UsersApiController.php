@@ -142,5 +142,17 @@ class UsersApiController extends Controller
 
     }
 
-    
+    public function getPostCardPrice(){
+        $currentPostCardPrice = DB::table('postcardprice')->orderByDesc('id')->first();;
+
+        if ($currentPostCardPrice) {
+            return response()->json(
+                [
+                    'success'=> "Post Card Price Fetched Successfully",
+                    'data' => $currentPostCardPrice,
+                ], 200);
+        }
+        return response()->json(['error'=> "Failed to fetch Post Card Price"], 401);
+    }
+
 }
