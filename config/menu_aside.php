@@ -25,7 +25,16 @@ return [
                 [
                     'title' => 'Users',
                     'bullet' => 'dot',
-                    'page' => 'users',
+                    'submenu' => [
+                        [
+                            'title' => 'All Users',
+                            'page' => 'users'
+                        ],
+                        [
+                            'title' => 'Create New User',
+                            'page' => 'create-user'
+                        ],
+                    ]
                 ],
                 [
                     'title' => 'Orders',

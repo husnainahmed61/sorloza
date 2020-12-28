@@ -17,6 +17,8 @@ Route::get('/signin','Auth\LoginController@loginForm');
 
 Route::get('/dashboard', 'PagesController@index')->middleware('admin');
 Route::get('/users','UsersController@show')->middleware('admin');
+Route::get('/create-user','UsersController@createNewUser')->name('create-user')->middleware('admin');
+Route::post('store-user','UsersController@storeNewUser')->name('store-user')->middleware('admin');
 Route::get('/paid-orders','OrderController@showPaidOrders');
 Route::get('/pending-payment','OrderController@showPendingPaymentOrders');
 Route::get('/notifications','HomeController@addNotification');

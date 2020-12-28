@@ -11,6 +11,13 @@
             </ul>
         </div>
     @endif
+    @if (\Session::has('error'))
+        <div class="alert alert-danger">
+            <ul>
+                <li>{!! \Session::get('error') !!}</li>
+            </ul>
+        </div>
+    @endif
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
