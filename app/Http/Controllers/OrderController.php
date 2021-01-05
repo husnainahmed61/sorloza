@@ -20,6 +20,8 @@ class OrderController extends Controller
           [
               'userId' => 'required',
               'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+              'city' => 'required',
+              'country' => 'required',
           ]);
 
       if ($validator->fails()) {
@@ -35,6 +37,8 @@ class OrderController extends Controller
       $address = new Address();
       $address->postal_address = $request->postal_address;
       $address->shipping_address = $request->shipping_address;
+      $address->city = $request->city;
+      $address->country = $request->country;
       $addressResult = $address->save();
       $addressResult = $address->toArray();
 
@@ -64,7 +68,7 @@ class OrderController extends Controller
       $orderResult = $order->save();
 
       if ($orderResult) {
-          $this->createPDF($fullFileName,$recipient->message,$address->shipping_address);
+          $this->createPDF($fullFileName,$recipient->message,$address->shipping_address, $request->recipientsName, $request->city, $request->country);
           return response()->json(['success'=> " Order Created"], 200);
       }
       return response()->json(['error'=> "Failed to process order"], 401);
@@ -128,15 +132,18 @@ class OrderController extends Controller
         return view('pages.UnpaidOrdersList', compact('page_title', 'page_description','unpaidOrders'));
     }
 
-    public function createPDF($img,$msg,$address) {
+    public function createPDF($img, $msg, $address, $recipientName, $city, $country) {
 
         $data["title"] = "Order and has been received successfully";
 
         $data['img'] = $img;
         $data['msg']  = $msg;
+        $data['recipientName'] = $recipientName;
         $data['address'] = $address;
+        $data['city'] = $city;
+        $data['country'] = $country;
 
-        $customPaper = array(0,0,450.00,550.80);
+        $customPaper = array(0,0,550.00,550.80);
 
         $pdf = PDF::loadView('email.myTestMail',$data)->setPaper($customPaper, 'landscape');
         Mail::send('email.orderBody', $data, function($message)use($data, $pdf) {
@@ -157,12 +164,14 @@ Y no siempre son iguales.
 Los arquitectos no inventan nada, solo transforman la
 realidad.
 No me importa cómo se ve un edificio, sino si significa algo a las personas que lo utilizan.";
-        $address = "Joan Cusachs Recoder
-Calle Valencia 285
+        $address = "Calle Valencia 285
 08009 Barcelona
 España";
+        $recipientName = "Joan Cusachs Recoder";
+        $city = "Rome";
+        $country = "Italy";
 
-        return view('email.myTestMail', compact('img','msg','address'));
+        return view('email.myTestMail', compact('img','msg','address','recipientName','city','country'));
 //        $pdf = PDF::loadView('email.myTestMail',$data);
 //        Mail::send('email.myTestMail', $data, function($message)use($data, $pdf) {
 //            $message->from('info@sorloza.com','The Sender');

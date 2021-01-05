@@ -30,9 +30,6 @@ class UsersApiController extends Controller
         $user->city = $request->city;
         $user->country = $request->country;
         $user->state = $request->state;
-        $user->delievery_type = $request->delievery_type;
-        $user->packaging_type = $request->packaging_type;
-        $user->preferred_delivery_window = $request->preferred_delivery_window;
         $user->email = $request->email;
         $user->password =Hash::make($request->password);
 

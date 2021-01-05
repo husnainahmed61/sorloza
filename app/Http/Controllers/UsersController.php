@@ -118,9 +118,6 @@ class UsersController extends Controller
         $user->city = $request->city;
         $user->country = $request->country;
         $user->state = $request->state;
-        $user->delievery_type = $request->delivery_type;
-        $user->packaging_type = $request->packaging_type;
-        $user->preferred_delivery_window = $request->preferred_delivery_window;
         $user->password =Hash::make($password);
 
         $result = $user->save();

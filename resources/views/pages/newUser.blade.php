@@ -105,28 +105,8 @@
                         <input type="text" class="form-control" name="state" id="inputPassword" placeholder="State...">
                     </div>
                 </div>
-                <div class="form-group col-sm-6 row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Delivery Type :</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="delivery_type" id="inputPassword" placeholder="Delivery Type...">
-                    </div>
-                </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-sm-6 row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Packaging Type :</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="packaging_type" id="inputPassword" placeholder="Packaging Type...">
-                    </div>
-                </div>
-                <div class="form-group col-sm-6 row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Preferred Delivery Window :</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="preferred_delivery_window" id="inputPassword" placeholder="Preferred Delivery Window...">
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="form-group col-sm-6 row">

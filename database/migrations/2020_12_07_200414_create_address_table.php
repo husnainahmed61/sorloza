@@ -17,6 +17,8 @@ class CreateAddressTable extends Migration
             $table->id();
             $table->longText('postal_address');
             $table->longText('shipping_address');
+            $table->string('city');
+            $table->string('country');
             $table->timestamps();
         });
     }

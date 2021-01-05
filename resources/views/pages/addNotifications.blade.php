@@ -78,6 +78,7 @@
                 <tr>
                     <th>Record ID</th>
                     <th>Notification Body</th>
+                    <th>Type</th>
                     <th>Created At</th>
                 </tr>
                 </thead>
@@ -87,6 +88,7 @@
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $notification->body }}</td>
+                        <td>{{ $notification->type }}</td>
                         <td>{{ $notification->created_at }}</td>
                         <td nowrap></td>
                     </tr>

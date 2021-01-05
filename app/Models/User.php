@@ -27,9 +27,6 @@ class User extends Authenticatable
         'contact',
         'postal_address',
         'permenant_address',
-        'delievery_type',
-        'packaging_type',
-        'preferred_delivery_window',
         'email',
         'password',
         'remember_token'
@@ -60,5 +57,5 @@ class User extends Authenticatable
         return $this->belongsTo(Order::class);
     }
 
-    
+
 }
